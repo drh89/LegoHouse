@@ -1,0 +1,51 @@
+
+USE LegoHouses;
+
+
+DROP TABLE IF EXISTS HouseInfo;
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS Customers;
+
+CREATE TABLE Customers(
+id INT(11) AUTO_INCREMENT,
+adminId INT (1) NOT NULL DEFAULT 0,
+username VARCHAR(45) NOT NULL,
+email VARCHAR(45) NOT NULL,
+pass VARCHAR(45) NOT NULL,
+balance DOUBLE(11,2) DEFAULT 100.00,
+PRIMARY KEY (id)
+)
+ENGINE = INNODB;
+
+-- CREATE TABLE Bricks(
+-- id INT(11) AUTO_INCREMENT,
+-- width INT(2) NOT NULL,
+-- length INT(2) NOT NULL,
+-- price DOUBLE(11,2) NOT NULL,
+-- PRIMARY KEY (id)
+-- )
+-- ENGINE = INNODB;
+
+CREATE TABLE Orders(
+id INT(11) AUTO_INCREMENT,
+customerId INT,
+shippingStatus VARCHAR(45) NOT NULL DEFAULT 'Confirmed',
+orderDate DATETIME DEFAULT NOW(),
+PRIMARY KEY (id),
+KEY customerId (customerId),
+CONSTRAINT orders_fk_1 FOREIGN KEY(customerId) REFERENCES Customers(id)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+)
+ENGINE INNODB;
+
+CREATE TABLE HouseInfo(
+length INT(11) NOT NULL,
+width INT(11) NOT NULL,
+height INT(11) NOT NULL,
+price DOUBLE(11,2) NOT NULL,
+orderId INT,
+KEY orderId(orderId),
+CONSTRAINT houseinfo_fk_1 FOREIGN KEY(orderId) REFERENCES Orders(id)
+)
+ENGINE INNODB;
