@@ -19,7 +19,7 @@ public class DBConnector {
     private static String driver = "com.mysql.jdbc.Driver";
     private static String url = "jdbc:mysql://142.93.160.41:3306/LegoHouses";
     private static String user = "Dennis";
-    private static String password = "Dennis123";
+    private static String password = "******";
 
     private static PreparedStatement stmt;
     private static Connection conn = null;
